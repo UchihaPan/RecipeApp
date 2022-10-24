@@ -20,7 +20,7 @@ const {data,  error, postData} =useFetch(' http://localhost:5000/recipes','POST'
 useEffect(()=>{
   if(data){
     history.push('/')
-
+    
   }
 },[data])
 
