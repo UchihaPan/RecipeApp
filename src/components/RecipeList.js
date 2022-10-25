@@ -1,6 +1,6 @@
 import React from 'react'
 import './Recipelist.css'
-import { BrowserRouter as Router, Route, Link, Switch} 
+import {  Link} 
         from "react-router-dom";
 import trashcan from '../assets/trashcan.svg'
 import { projectfirestore } from '../firebase/config'

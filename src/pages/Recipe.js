@@ -1,11 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-  Link,
-} from "react-router-dom";
+
+  useParams} from "react-router-dom";
 import './Recipe.css';
 import { projectfirestore } from '../firebase/config'
 

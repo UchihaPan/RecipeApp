@@ -6,12 +6,12 @@ import Create from './pages/Create';
 import Navbar from './components/Navbar';
 import ThemeSelector from './components/ThemeSelector'
 
-import { BrowserRouter as Router, Route, Link, Switch} 
+import { BrowserRouter as Router, Route, Switch} 
         from "react-router-dom";
 
         import useTheme from './hooks/useTheme'
 function App() {
-  const { color ,thor} = useTheme()
+  const { color} = useTheme()
   console.log(color);
 
   return (

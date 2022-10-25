@@ -5,7 +5,7 @@ import Searchbar from './Searchbar'
 import useTheme from '../hooks/useTheme'
 
 function Navbar() {
-  const { color ,color_change} = useTheme()
+  const { color} = useTheme()
 
   return (
     <div className="navbar" style={{background:color}}>
