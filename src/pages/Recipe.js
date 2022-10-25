@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,14 +6,38 @@ import {
   useParams,
   Link,
 } from "react-router-dom";
-import {useFetch} from '../hooks/useFetch'
-import './Recipe.css'
+import './Recipe.css';
+import { projectfirestore } from '../firebase/config'
+
 
 
 function Recipe() {
+  const [recipe,setrecipe]=useState(null)
+  const [isPending,setisPending]=useState(false)
+  const [error,seterror]=useState(false)
   let { id } = useParams()
-  const url=   'http://localhost:5000/recipes/'+ id
-  const { data:recipe, isPending, error }=useFetch(url)
+
+  useEffect(()=>{
+
+    setisPending(true)
+   const unsub= projectfirestore.collection('recipes').doc(id).onSnapshot((doc)=>
+ {   if(doc.exists){
+      setisPending(false)
+      setrecipe({...doc.data()})
+    }
+
+  else{                                           
+    seterror('Not available')
+    setisPending(false)
+
+  }}
+    )
+
+
+    return ()=>unsub()
+
+
+  },[id])
 
 
 
@@ -22,11 +46,10 @@ function Recipe() {
       {error && <p className='error'>{error}</p>}
       {isPending && <p className='loading'>loading....</p>}
 
-      {recipe && 
-
+      {recipe && recipe!= null &&
       <div >
       <h2 className='page-title'>{recipe.title}</h2>
-      <p>{recipe.cookingTime} to cook</p>
+      <p>{recipe.cookingtime } to cook</p>
       <ul>
       {recipe.ingredients && recipe.ingredients.map(item=><li key={item}>{item}</li>)}
       </ul>
@@ -42,6 +65,7 @@ function Recipe() {
 
     </div>
   )
-}
+    }
+
 
 export default Recipe
